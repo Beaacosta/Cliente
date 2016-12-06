@@ -1,14 +1,14 @@
 
 package es.uc3m.tiw.daos;
 
-import java.sql.SQLException;
-import java.util.Collection;
 
-import org.springframework.data.repository.CrudRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
 
 import es.uc3m.tiw.dominios.Usuario;
 
-public interface UsuarioDao extends CrudRepository<Usuario, Long> {
+public interface UsuarioDao extends JpaRepository<Usuario, Long>{
 
 	//Mejor usar JPA que crudRepository (investigar)
 
