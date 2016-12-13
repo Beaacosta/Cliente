@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.uc3m.tiw.daos.UsuarioDao;
@@ -25,7 +26,7 @@ public class Controlador {
 	private UsuarioDao dao;
 	
 	//Buscar un usuario en la BBDD por id
-	@RequestMapping(value = "/buscar_id", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar_id", method = RequestMethod.POST)
 	public Usuario buscarId(@RequestParam(value = "id", required = true) int id){
 		usuario = new Usuario();
 		usuario = dao.findById(id);
@@ -33,11 +34,10 @@ public class Controlador {
 	}
 	
 	//Buscar un usuario en la BBDD por email
-	@RequestMapping(value = "/buscar_mail", method = RequestMethod.GET)
-	public Usuario buscarMail(@RequestParam(value = "mail", required = true) String mail){
-		usuario = new Usuario();
-		usuario = dao.findByMail(mail);
-		return usuario;
+	@RequestMapping(value = "/buscar_mail", method = RequestMethod.POST)
+	public @ResponseBody Usuario buscarMail(@RequestBody Usuario usuario){
+		Usuario u = dao.findByMail(usuario.getMail());
+		return u;
 	}
 		
 	//Listar todos los usuarios
