@@ -52,9 +52,8 @@ public class Controlador {
 	}
 
 	//Eliminar un usuario
-	@RequestMapping(value = "/eliminar_usuario", method = RequestMethod.DELETE)
-	public void eliminarUsuario(@RequestParam(value = "id", required = true) int id){
-		usuario = dao.findById(id);
+	@RequestMapping(value = "/eliminar_usuario", method = RequestMethod.POST)
+	public void eliminarUsuario(@RequestBody Usuario usuario){
 		dao.delete(usuario);
 	}
 	
@@ -64,8 +63,9 @@ public class Controlador {
 		dao.save(usuario);
 	}
 	//Modificar un usuario
-	@RequestMapping(value = "/modificar_usuario", method = RequestMethod.PUT)
-	public void modificarProducto(Usuario usuario){
-		dao.save(usuario);
+	@RequestMapping(value = "/modificar_usuario", method = RequestMethod.POST)
+	public void modificarUsuario(@RequestBody Usuario usuario){
+		 dao.save(usuario);
+
 	}
 }
