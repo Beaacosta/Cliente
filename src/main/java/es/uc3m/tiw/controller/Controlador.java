@@ -2,6 +2,7 @@ package es.uc3m.tiw.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import es.uc3m.tiw.dominios.Usuario;
 public class Controlador {
 	
 	private Usuario usuario;
+	@Autowired
 	private UsuarioDao dao;
 	
 	//Buscar un usuario en la BBDD por id
@@ -36,13 +38,14 @@ public class Controlador {
 	//Buscar un usuario en la BBDD por email
 	@RequestMapping(value = "/buscar_mail", method = RequestMethod.POST)
 	public @ResponseBody Usuario buscarMail(@RequestBody Usuario usuario){
-		Usuario u = dao.findByMail(usuario.getMail());
+		Usuario u = null;
+		u=dao.findByMail(usuario.getMail());
 		return u;
 	}
 		
 	//Listar todos los usuarios
-	@RequestMapping(value = "/listar_usuarios", method = RequestMethod.GET)
-	public List<Usuario> listarUsuarios(){
+	@RequestMapping(value = "/listar_usuarios", method = RequestMethod.POST)
+	public @ResponseBody List<Usuario> listarUsuarios(){
 		List<Usuario> usuarios = null;
 		usuarios = dao.findAll();
 		return usuarios;
@@ -56,8 +59,8 @@ public class Controlador {
 	}
 	
 	//Añadir un usuario
-	@RequestMapping(value = "/anyadir_usuario", method = RequestMethod.PUT)
-	public void anyadirUsuario(Usuario usuario){
+	@RequestMapping(value = "/anyadir_usuario", method = RequestMethod.POST)
+	public void anyadirUsuario(@RequestBody Usuario usuario){
 		dao.save(usuario);
 	}
 	//Modificar un usuario
