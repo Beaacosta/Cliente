@@ -72,8 +72,10 @@ public class Controlador {
 	
 	//Añadir un usuario
 	@RequestMapping(value = "/anyadir_usuario", method = RequestMethod.POST)
-	public void anyadirUsuario(@RequestBody Usuario usuario){
-		dao.save(usuario);
+	public @ResponseBody Usuario anyadirUsuario(@RequestBody Usuario usuario){
+		Usuario u = null;
+		u = dao.save(usuario);
+		return u;
 	}
 	//Modificar un usuario
 	@RequestMapping(value = "/modificar_usuario", method = RequestMethod.POST)
