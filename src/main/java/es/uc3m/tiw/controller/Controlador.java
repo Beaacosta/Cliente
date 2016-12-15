@@ -37,10 +37,23 @@ public class Controlador {
 	
 	//Buscar un usuario en la BBDD por email
 	@RequestMapping(value = "/buscar_mail", method = RequestMethod.POST)
-	public @ResponseBody Usuario buscarMail(@RequestBody Usuario usuario){
+	public @ResponseBody Usuario buscarMail(@RequestBody Usuario usuario) throws IllegalArgumentException{
 		Usuario u = null;
-		u=dao.findByMail(usuario.getMail());
-		return u;
+		try{
+			u=dao.findByMail(usuario.getMail());
+			if(!u.equals(null)){
+				return u;			
+			}
+			else{
+				u = null;
+				return u;
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return usuario;
+		}
+
 	}
 		
 	//Listar todos los usuarios
@@ -65,6 +78,6 @@ public class Controlador {
 	//Modificar un usuario
 	@RequestMapping(value = "/modificar_usuario", method = RequestMethod.POST)
 	public void modificarUsuario(@RequestBody Usuario usuario){
-		 dao.save(usuario);
+			 dao.save(usuario);	
 	}
 }
