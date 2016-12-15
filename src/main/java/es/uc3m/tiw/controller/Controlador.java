@@ -66,6 +66,5 @@ public class Controlador {
 	@RequestMapping(value = "/modificar_usuario", method = RequestMethod.POST)
 	public void modificarUsuario(@RequestBody Usuario usuario){
 		 dao.save(usuario);
-
 	}
 }
