@@ -29,7 +29,6 @@ public class Controlador {
 	//Buscar un usuario en la BBDD por id
 	@RequestMapping(value = "/buscar_id", method = RequestMethod.POST)
 	public @ResponseBody Usuario buscarId(@RequestParam(value = "id", required = true) int id){
-		usuario = new Usuario();
 		usuario = dao.findById(id);
 		return usuario;
 	}
